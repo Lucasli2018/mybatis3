@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 根节点是Configuration -->
+<Configuration>
+<!-- 这里定义了一系列的properties -->
+	<Properties>
+	<!-- 打印日志的格式 -->
+		<Property name="log.pattern">%d{MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36}%n%msg%n%n</Property>
+		<Property name="file.all.filename">log/all.log</Property>
+		<Property name="file.all.pattern">log/all.%i.log.gz</Property>
+		<Property name="file.err.filename">log/err.log</Property>
+		<Property name="file.err.pattern">log/err.%i.log.gz</Property>
+	</Properties>
+	<Appenders>
+	<!-- 第一个appender是Console，屏幕 -->
+		<Console name="console" target="SYSTEM_OUT">
+		<!-- 输出格式PatternLayout为properties指定的格式 -->
+			<PatternLayout pattern="${log.pattern}" />
+		</Console>
+		
+	<!-- 第二个appender是RollingFile，文件 -->
+		<RollingFile name="all" bufferedIO="true" fileName="${file.all.filename}"
+			filePattern="${file.all.pattern}">
+			<PatternLayout pattern="${log.pattern}" />
+			<!-- 这里Polices的意思是每当文件大小达到1mb时，切割成新的文件 -->
+			<Policies>
+				<SizeBasedTriggeringPolicy size="1 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
+		<RollingFile name="err" bufferedIO="true"
+			fileName="${file.err.filename}" filePattern="${file.err.pattern}">
+			<PatternLayout pattern="${log.pattern}" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="1 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
+	</Appenders>
+	
+	<!-- 最后在Loggers中定义Root -->
+	<Loggers>
+		<Root level="info">
+		<!-- 关联到3个Appender中 -->
+			<AppenderRef ref="console" level="info" />
+			<AppenderRef ref="all" level="info" />
+			<AppenderRef ref="err" level="error" />
+		</Root>
+		
+		<!-- 最后所有的com.feiyangedu.sample的debug日志会打印在console中 -->
+		<Logger name="com.feiyangedu.sample" level="debug">
+			<AppenderRef ref="console" level="debug" />
+		</Logger>
+	</Loggers>
+</Configuration>
