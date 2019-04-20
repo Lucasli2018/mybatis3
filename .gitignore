@@ -13,3 +13,4 @@
 /RemoteSystemsTempFiles/*.project
 /mybatisdemo/log/*.log
 /mybatisdemo/.settings
+/.recommenders/caches/*.json
