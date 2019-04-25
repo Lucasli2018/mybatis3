@@ -1,4 +1,4 @@
-package com.lucas.mybatis.generator.po;
+package com.lucas.maven.mybatisdemo.generator.po;
 
 import java.util.Date;
 

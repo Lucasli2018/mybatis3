@@ -1,7 +1,7 @@
-package com.lucas.mybatis.generator.mapper;
+package com.lucas.maven.mybatisdemo.generator.mapper;
 
-import com.lucas.mybatis.generator.po.User;
-import com.lucas.mybatis.generator.po.UserExample;
+import com.lucas.maven.mybatisdemo.generator.po.User;
+import com.lucas.maven.mybatisdemo.generator.po.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
